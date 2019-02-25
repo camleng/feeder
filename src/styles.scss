@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+small {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.x {
+    color: red;
+    font-size: 1.6rem;
+}

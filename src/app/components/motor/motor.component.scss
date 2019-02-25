@@ -1,0 +1,32 @@
+@import '../../../mixins.scss';
+
+.title {
+    margin: 2rem 0 0.5rem 0;
+}
+
+.turn-btn {
+    width: 100%;
+    max-width: 400px;
+
+    @include phone {
+        width: 190px;
+    }
+}
+
+.status {
+    font-size: 18px;
+    margin-bottom: 1rem;
+
+    code {
+        color: black;
+    }
+    span {
+        color: lightgreen;
+    }
+}
+
+.progress {
+    background-color: lightgreen;
+    height: 3px;
+    border-radius: 5px;
+}

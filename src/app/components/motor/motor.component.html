@@ -1,0 +1,12 @@
+<div class="container">
+    <h2 class="title">Motor Control</h2>
+    <div class="status">
+        <code>
+            Status:
+            <span>{{ status }}</span>
+        </code>
+    </div>
+    <button class="btn btn-primary turn-btn" 
+        (click)="turn()"
+        [disabled]="isTurning()">Turn Motor</button>
+</div>

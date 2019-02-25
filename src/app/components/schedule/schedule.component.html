@@ -1,0 +1,47 @@
+<div class="container">
+    <h2 class="title">Schedule <small>(daily)</small></h2>
+
+    <div class="feedings">
+        <form class="feeding form-inline" *ngFor="let feeding of feedings" #f="ngForm" (mouseover)="feeding.showDelete = true" (mouseout)="feeding.showDelete = false">
+            <input name="hour" 
+                type="number" 
+                class="form-control" 
+                pattern="\d{1,2}"
+                maxlength="2"
+                min="0"
+                oninput="validity.valid || (value='')"
+                [ngModel]="feeding.hour | time" 
+                (ngModelChange)="feeding.hour = $event"
+                (blur)="scheduleFeedings()">
+
+            <input name="minute" 
+                type="number" 
+                class="form-control" 
+                pattern="\d{1,2}"
+                maxlength="2"
+                min="0"
+                oninput="validity.valid || (value='')"
+                [ngModel]="feeding.minute | time" 
+                (ngModelChange)="feeding.minute = $event"
+                (blur)="scheduleFeedings()">
+
+            <select name="period" 
+                [(ngModel)]="feeding.period" 
+                class="form-control period"
+                (change)="scheduleFeedings()">
+                <option 
+                    [value]="period" 
+                    *ngFor="let period of periods">{{ getPeriod(period) }}
+            </select>
+            <div class="btn btn-danger" [hidden]="!feeding.showDelete" (click)="deleteFeeding(feeding)">
+                <i class="far fa-trash-alt"></i>
+            </div>
+        </form>
+    </div>
+
+    <button class="btn btn-primary" 
+        (click)="addFeedingTime()">
+        <i class="far fa-clock"></i>
+        Add Feeding Time
+    </button>
+</div>

@@ -1,0 +1,42 @@
+.title {
+    margin: 2rem 0 0.5rem 0;
+}
+
+.btn i {
+    margin-right: 0.25rem;
+}
+
+.feedings {
+    margin: 1.5rem 0;
+}
+
+.feeding {
+    &:not(:first-child) {
+        margin-top: 0.5rem;
+    }
+}
+
+.form-control {
+    width: 4rem;
+    text-align: center;
+    text-align-last: center;
+    &:not(:first-child) {
+        margin-left: 1rem;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.btn-danger {
+    margin-left: 1rem;
+    i {
+        margin-right: 0;
+    }
+}
+
+.form-inline {
+    width: 20rem;
+}
