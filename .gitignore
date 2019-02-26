@@ -45,5 +45,5 @@ Thumbs.db
 # Environment files
 .env
 
-# Python Feeder file
-feeder.py
+# Python Test Feeder file
+test-feeder.py
