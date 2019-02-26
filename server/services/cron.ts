@@ -69,7 +69,8 @@ function removeFeederEntries(entry) {
 }
 
 async function writeLines(lines: string[]) {
-    await writeFile(crontabTempPath, lines.join('\n'));
+    const content = lines.join('\n') + '\n';
+    await writeFile(crontabTempPath, content);
 }
 
 function removeEmpty(entry: string) {
