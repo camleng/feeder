@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Feeding } from 'src/app/models/Feeding';
-import { ScheduleService } from 'src/app/services/schedule/schedule.service';
+import { Feeding } from 'web/app/models/Feeding';
+import { ScheduleService } from 'web/app/services/schedule/schedule.service';
 import { Period } from 'server/models/period';
 
 @Component({

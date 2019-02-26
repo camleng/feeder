@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Feeding } from 'src/app/models/Feeding';
+import { Feeding } from 'web/app/models/Feeding';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

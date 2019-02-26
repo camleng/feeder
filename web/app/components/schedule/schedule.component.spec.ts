@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScheduleComponent } from './schedule.component';
-import { ScheduleService } from 'src/app/services/schedule/schedule.service';
-import { Feeding } from 'src/app/models/Feeding';
-import { Period } from 'src/app/models/Period';
+import { ScheduleService } from 'web/app/services/schedule/schedule.service';
+import { Feeding } from 'web/app/models/Feeding';
+import { Period } from 'web/app/models/Period';
 import { of } from 'rxjs';
 
 describe('ScheduleComponent', () => {

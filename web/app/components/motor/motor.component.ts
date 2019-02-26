@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Status } from 'src/app/models/Status';
-import { MotorService } from 'src/app/services/motor/motor.service';
+import { Status } from 'web/app/models/Status';
+import { MotorService } from 'web/app/services/motor/motor.service';
 
 @Component({
     selector: 'app-motor',
