@@ -12,7 +12,7 @@ export class MotorService {
 
     turn(): Observable<any> {
         let url = this.stripTrailingSlash();
-        return this.http.post(`${url}/turn`, null);
+        return this.http.post(`${url}/api/turn`, null);
     } 
 
     stripTrailingSlash(): string {

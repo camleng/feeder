@@ -47,3 +47,6 @@ Thumbs.db
 
 # Python Test Feeder file
 test-feeder.py
+
+# Certificates
+certs

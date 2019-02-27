@@ -6,7 +6,7 @@ let router = express.Router();
 
 router.post('/', (req, res) => {
     turnMotor();
-    res.send(JSON.stringify({ message: 'OK' }));
+    res.json({ message: 'OK' });
 });
 
 module.exports = router;

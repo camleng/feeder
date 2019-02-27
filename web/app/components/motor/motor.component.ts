@@ -44,6 +44,6 @@ export class MotorComponent implements OnInit {
 
     buildSocketUrl() {
         let middle = this.baseUrl.split(':')[1];
-        return `ws:${middle}:8000`;
+        return `wss:${middle}:8000`;
     }
 }

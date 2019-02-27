@@ -1,10 +1,10 @@
 import * as WebSocket from 'ws';
 import { Status } from '../models/status';
-import { Server } from 'http';
+import { Server } from 'https';
 
 let wss: WebSocket.Server;
 
-export function initializeWebSocketServer(server: Server) {
+export function initServer(server: Server) {
     wss = new WebSocket.Server({ server });
     
     wss.on('connection', ws => {

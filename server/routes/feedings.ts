@@ -5,17 +5,17 @@ import { getEntries, toEntry, scheduleJobs, deleteEntry } from '../services/cron
 let router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send(JSON.stringify(getFeedings()));
+    res.json(getFeedings());
 });
 
 router.put('/', (req, res) => {
     scheduleFeedings(req.body);
-    res.send({ status: 200 });
+    res.json({ status: 200 });
 });
 
 router.post('/delete', (req, res) => {
     deleteFeeding(req.body);
-    res.send({ status: 200 });
+    res.json({ status: 200 });
 });
 
 module.exports = router;
@@ -27,11 +27,19 @@ function getFeedings(): Feeding[] {
 
 function scheduleFeedings(feedings: Feeding[]) {
     let cronEntries = feedings.map(feeding => {
-        if (isPM(feeding))
+        if(isMidnight(feeding))
+            feeding.hour = 0;
+        else if (isPM(feeding))
             feeding.hour += 12
         return buildCronEntry(feeding);
     });
     scheduleJobs(cronEntries);
+}
+
+function isMidnight(feeding: Feeding) {
+    return Number(feeding.hour) === 12 
+        && Number(feeding.minute) === 0
+        && Number(feeding.period) === Period.AM;
 }
 
 function isPM(feeding: Feeding): boolean {
