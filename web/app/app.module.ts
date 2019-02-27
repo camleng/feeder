@@ -23,6 +23,7 @@ import { TimePipe } from './pipes/time/time.pipe';
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
+            { path: '', redirectTo: 'feeder', pathMatch: 'full' },
             { path: 'feeder', component: MotorComponent },
             { path: 'schedule', component: ScheduleComponent },
             { path: '*', redirectTo: 'feeder', pathMatch: 'full' }
