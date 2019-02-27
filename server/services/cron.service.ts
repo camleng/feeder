@@ -1,5 +1,5 @@
 import * as shell from 'shelljs';
-import { readFile, writeFile } from '../services/file';
+import { readFile, writeFile } from './file.service';
 
 const crontabCmd = 'crontab -l | grep -e leo-feeder';
 const crontabTempPath = '/tmp/crontab';

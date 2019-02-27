@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MotorComponent } from './components/motor/motor.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { TimePipe } from './pipes/time/time.pipe';
@@ -24,12 +23,12 @@ import { TimePipe } from './pipes/time/time.pipe';
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'feeder', pathMatch: 'full' },
             { path: 'feeder', component: MotorComponent },
             { path: 'schedule', component: ScheduleComponent },
-        ])
+            { path: '*', redirectTo: 'feeder', pathMatch: 'full' }
+        ], { useHash: true })
     ],
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

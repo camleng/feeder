@@ -1,31 +1,13 @@
-import * as express from 'express';
-import { Feeding } from '../models/feeding';
-import { Period } from '../models/period';
-import { getEntries, toEntry, scheduleJobs, deleteEntry } from '../services/cron';
-let router = express.Router();
+import { Feeding } from "../models/feeding";
+import { getEntries, toEntry, scheduleJobs, deleteEntry } from "./cron.service";
+import { Period } from "../models/period";
 
-router.get('/', (req, res) => {
-    res.json(getFeedings());
-});
-
-router.put('/', (req, res) => {
-    scheduleFeedings(req.body);
-    res.json({ status: 200 });
-});
-
-router.post('/delete', (req, res) => {
-    deleteFeeding(req.body);
-    res.json({ status: 200 });
-});
-
-module.exports = router;
-
-function getFeedings(): Feeding[] {
+export function getFeedings(): Feeding[] {
     var times = getEntries().map(toEntry)
     return times.map(toFeeding).sort(byTime);
 }
 
-function scheduleFeedings(feedings: Feeding[]) {
+export function scheduleFeedings(feedings: Feeding[]) {
     let cronEntries = feedings.map(feeding => {
         if(isMidnight(feeding))
             feeding.hour = 0;
@@ -34,6 +16,11 @@ function scheduleFeedings(feedings: Feeding[]) {
         return buildCronEntry(feeding);
     });
     scheduleJobs(cronEntries);
+}
+
+export function deleteFeeding(feeding: Feeding) {
+    const entry = buildCronEntry(feeding);
+    deleteEntry(entry)
 }
 
 function isMidnight(feeding: Feeding) {
@@ -46,12 +33,7 @@ function isPM(feeding: Feeding): boolean {
     return Number(feeding.period) === Period.PM
 }
 
-function deleteFeeding(feeding: Feeding) {
-    const entry = buildCronEntry(feeding);
-    deleteEntry(entry)
-}
-
-function buildCronEntry(feeding: Feeding) {
+export function buildCronEntry(feeding: Feeding) {
     let scriptName = `${process.cwd()}/feeder.py`;
     return `${feeding.minute}\t${feeding.hour}\t*\t*\t*\t${process.env.PYTHON} ${scriptName}`;
 }
