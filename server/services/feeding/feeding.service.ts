@@ -1,16 +1,18 @@
-import { Feeding } from "../models/feeding";
-import { getEntries, toEntry, scheduleJobs, deleteEntry } from "./cron.service";
-import { Period } from "../models/period";
+import { Feeding } from "../../models/feeding";
+import { Period } from "../../models/period";
+import { scheduleJobs, toTime, getEntries, deleteEntry } from '../cron/cron.service';
 
 export function getFeedings(): Feeding[] {
-    var times = getEntries().map(toEntry)
+    var times = getEntries().map(toTime);
     return times.map(toFeeding).sort(byTime);
 }
 
 export function scheduleFeedings(feedings: Feeding[]) {
     let cronEntries = feedings.map(feeding => {
-        if(isMidnight(feeding))
+        console.log(feeding);
+        if (isMidnight(feeding)) {
             feeding.hour = 0;
+        }
         else if (isPM(feeding))
             feeding.hour += 12
         return buildCronEntry(feeding);
@@ -23,8 +25,8 @@ export function deleteFeeding(feeding: Feeding) {
     deleteEntry(entry)
 }
 
-function isMidnight(feeding: Feeding) {
-    return Number(feeding.hour) === 12 
+function isMidnight(feeding: Feeding): boolean {
+    return Number(feeding.hour) === 12
         && Number(feeding.minute) === 0
         && Number(feeding.period) === Period.AM;
 }
@@ -33,7 +35,7 @@ function isPM(feeding: Feeding): boolean {
     return Number(feeding.period) === Period.PM
 }
 
-export function buildCronEntry(feeding: Feeding) {
+function buildCronEntry(feeding: Feeding) {
     let scriptName = `${process.cwd()}/feeder.py`;
     return `${feeding.minute}\t${feeding.hour}\t*\t*\t*\t${process.env.PYTHON} ${scriptName}`;
 }

@@ -1,5 +1,5 @@
 import * as express from 'express'
-import { turnMotor } from '../services/motor.service';
+import { turnMotor } from '../services/motor/motor.service';
 let router = express.Router();
 
 router.post('/', (req, res) => {

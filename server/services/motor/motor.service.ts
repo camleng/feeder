@@ -1,5 +1,5 @@
-import { broadcast } from './socket.service';
-import { Status } from '../models/status';
+import { broadcast } from '../socket/socket.service';
+import { Status } from '../../models/status';
 import * as shell from 'shelljs';
 
 export function turnMotor() {

@@ -1,5 +1,5 @@
 import * as shell from 'shelljs';
-import { readFile, writeFile } from './file.service';
+import { readFile, writeFile } from '../file/file.service';
 
 const crontabCmd = 'crontab -l | grep -e leo-feeder';
 const crontabTempPath = '/tmp/crontab';
@@ -9,14 +9,6 @@ export function getEntries() {
         .stdout
         .split('\n')
         .filter(removeEmpty);
-}
-
-export function toEntry(entry: string): string[] {
-    var regexp = /(\d{1,2})\s+(\d{1,2}).*leo-feeder.*/;
-    let matches = regexp.exec(entry);
-    return matches 
-        ? matches.slice(1, 3) 
-        : [];
 }
 
 export async function scheduleJobs(cronEntries: string[]) {
@@ -36,43 +28,51 @@ export async function deleteEntry(entry: string) {
     installNewCrontab();
 }
 
-function removeFromArray(item: string, array: string[]): string[] {
+export function toTime(entry: string): string[] {
+    var regexp = /(\d{1,2})\s+(\d{1,2}).*leo-feeder.*/;
+    let matches = regexp.exec(entry);
+    return matches
+        ? matches.slice(1, 3)
+        : [];
+}
+
+export function removeFromArray(item: string, array: string[]): string[] {
     const index = array.indexOf(item);
     array.splice(index, 1);
     return array;
 }
 
-function installNewCrontab() {
+export function installNewCrontab() {
     shell.exec(`crontab ${crontabTempPath}`);
 }
 
-function copyEntriesToTempFile() {
+export function copyEntriesToTempFile() {
     shell.exec(`crontab -l > ${crontabTempPath}`);
 }
 
-function addEntries(data: Buffer | string, cronEntries: string[]): string[] {
+export function addEntries(data: Buffer | string, cronEntries: string[]): string[] {
     const originalEntries = getOriginalEntries(data);
     return Array.from(new Set(originalEntries.concat(cronEntries)));
 }
 
-function getOriginalEntries(data): string[] {
+export function getOriginalEntries(data): string[] {
     let entries = split(data);
     return entries.filter(removeFeederEntries);
 }
 
-function split(data: Buffer): string[] {
+export function split(data: Buffer): string[] {
     return data.toString().split('\n').filter(removeEmpty);
 }
 
-function removeFeederEntries(entry) {
-    return toEntry(entry).length === 0;
+export function removeFeederEntries(entry) {
+    return toTime(entry).length === 0;
 }
 
-async function writeLines(lines: string[]) {
+export async function writeLines(lines: string[]) {
     const content = lines.join('\n') + '\n';
     await writeFile(crontabTempPath, content);
 }
 
-function removeEmpty(entry: string) {
+export function removeEmpty(entry: string) {
     return entry !== '';
 }

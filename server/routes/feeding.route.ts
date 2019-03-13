@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { getFeedings, scheduleFeedings, deleteFeeding } from '../services/feeding.service';
+import { getFeedings, scheduleFeedings, deleteFeeding } from '../services/feeding/feeding.service';
 let router = express.Router();
 
 router.get('/', (req, res) => {

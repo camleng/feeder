@@ -4,10 +4,11 @@ import * as cors from 'cors';
 import * as path from 'path';
 import * as feedings from './routes/feeding.route';
 import * as motor from './routes/motor.route';
-import * as socket from './services/socket.service';
+import * as socket from './services/socket/socket.service';
 import * as dotenv from 'dotenv';
 import * as bodyParser from 'body-parser';
-import * as ssl from './services/ssl.service';
+import * as ssl from './services/ssl/ssl.service';
+import { Application } from 'express-serve-static-core';
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -22,8 +23,8 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'web')));
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/api/feedings', feedings);
-app.use('/api/turn', motor)
+app.use('/api/feedings', <express.Router>feedings);
+app.use('/api/turn', <express.Router>motor)
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve('./web/index.html'));

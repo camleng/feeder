@@ -1,5 +1,5 @@
 import * as WebSocket from 'ws';
-import { Status } from '../models/status';
+import { Status } from '../../models/status';
 import { Server } from 'https';
 
 let wss: WebSocket.Server;

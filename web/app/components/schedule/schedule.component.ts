@@ -22,17 +22,11 @@ export class ScheduleComponent implements OnInit {
 
     addFeedingTime() {
         this.feedings.push(new Feeding);
+        this.scheduleFeedings();
     }
 
     scheduleFeedings() {
-        let feedings = this.feedings.filter(this.removeIncomplete);
-        console.log(feedings);
-
-        this.scheduler.scheduleFeedings(feedings).subscribe();
-    }
-
-    removeIncomplete(feeding: Feeding) {
-        return feeding.hour !== 0 || feeding.minute !== 0;
+        this.scheduler.scheduleFeedings(this.feedings).subscribe();
     }
 
     formatTimeComponent(component: number): string {
