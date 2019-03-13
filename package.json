@@ -9,9 +9,9 @@
     "build:server:watch": "tsc -w -p tsconfig.server.json ",
     "start:web:watch": "ng build --output-path dist/web --watch",
     "start:server:watch": "npm run build:server:watch & nodemon ./dist/server.js",
+    "deploy:stage": "npm run deploy:web:stage & npm run deploy:server:stage",
     "deploy:web:stage": "ng build --prod --outputPath=\"../stage/web\" --deleteOutputPath=true",
     "deploy:server:stage": "tsc -p tsconfig.server.json --outDir ../stage --sourceMap false",
-    "deploy:stage": "npm run deploy:web:stage & npm run deploy:server:stage",
     "test": "ng test"
   },
   "private": true,

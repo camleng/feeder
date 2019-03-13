@@ -27,7 +27,7 @@ import { TimePipe } from './pipes/time/time.pipe';
             { path: 'feeder', component: MotorComponent },
             { path: 'schedule', component: ScheduleComponent },
             { path: '*', redirectTo: 'feeder', pathMatch: 'full' }
-        ], { useHash: true })
+        ])
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -9,7 +9,6 @@ export function getFeedings(): Feeding[] {
 
 export function scheduleFeedings(feedings: Feeding[]) {
     let cronEntries = feedings.map(feeding => {
-        console.log(feeding);
         if (isMidnight(feeding)) {
             feeding.hour = 0;
         }
